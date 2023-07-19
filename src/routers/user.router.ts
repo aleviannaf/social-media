@@ -1,29 +1,21 @@
 import { Router } from "express";
 import { userControllers } from "../controllers";
-import uniqueEmail from "../middlewares/uniqueEmail.middleware";
-import uniqueUsername from "../middlewares/uniqueUsername.middleware";
-import verifyUserIdParams from "../middlewares/verifyUserIdParams.middleware";
+import middlewares from "../middlewares";
 
 const userRouter: Router = Router()
 
 userRouter.post(
     "", 
-    uniqueEmail, 
-    uniqueUsername, 
+    middlewares.uniqueEmail, 
+    middlewares.uniqueUsername, 
     userControllers.create
 )
 
-userRouter.get(
-    "/:id",
-    verifyUserIdParams, 
-    userControllers.retrieve
-)
+userRouter.use("/:id", middlewares.verifyUserIdParams)
 
-userRouter.delete(
-    "/:id",
-    verifyUserIdParams, 
-    userControllers.destroy
-)
+userRouter.get("/:id", userControllers.retrieve)
+
+userRouter.delete("/:id", userControllers.destroy)
 
 userRouter.patch("/:id")
 
