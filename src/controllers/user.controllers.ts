@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { User, UserCreate } from "../interfaces";
+import { User, UserCreate, UserUpdate } from "../interfaces";
 import { userServices } from "../services";
 
 const create = async (req: Request, res: Response): Promise<Response> =>{
@@ -27,6 +27,16 @@ const destroy = async (req: Request, res: Response): Promise<Response> =>{
     return res.status(204).send()
 }
 
+const update = async (req: Request, res: Response): Promise<Response> =>{
+    
+    const userId: number = parseInt(req.params.id)
+    const payload: UserUpdate = req.body
+    
+    const newUser = await userServices.update(payload ,userId)
+
+    return res.status(201).json(newUser)
+}
 
 
-export default { create, retrieve, destroy }
+
+export default { create, retrieve, destroy, update }

@@ -17,7 +17,7 @@ userRouter.get("/:id", userControllers.retrieve)
 
 userRouter.delete("/:id", userControllers.destroy)
 
-userRouter.patch("/:id")
+userRouter.patch("/:id", userControllers.update)
 
 userRouter.post("/:id/profile")
 
