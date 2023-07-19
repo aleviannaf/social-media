@@ -16,4 +16,22 @@ const create = async (payload: UserCreate): Promise<User> => {
     return queryResult.rows[0]
 }
 
-export default {create}
+const retrieve = async (userId: number): Promise<User> => {
+    
+    const query: UserResult = await client.query(
+        `SELECT * FROM "users" WHERE "id" = $1`,
+        [userId]
+    )
+
+    return query.rows[0]
+}
+
+const destroy = async (userId: number): Promise<void> => {
+    
+    await client.query(
+        `DELETE FROM "users" WHERE "id" = $1`,
+        [userId]
+    )
+}
+
+export default {create, retrieve, destroy}
