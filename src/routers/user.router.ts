@@ -17,7 +17,12 @@ userRouter.get("/:id", userControllers.retrieve)
 
 userRouter.delete("/:id", userControllers.destroy)
 
-userRouter.patch("/:id", userControllers.update)
+userRouter.patch(
+    "/:id",
+    middlewares.uniqueEmail, 
+    middlewares.uniqueUsername, 
+    userControllers.update
+)
 
 userRouter.post("/:id/profile")
 
