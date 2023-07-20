@@ -9,7 +9,7 @@ const verifyUserIdParams = async (req: Request, res: Response, next: NextFunctio
     const userId: number  = parseInt(req.params.id)
 
     const query: UserResult = await client.query(
-        `SELECT * FROM "users" WHERE "email" = $1 `,
+        `SELECT * FROM "users" WHERE "id" = $1 `,
         [userId]
     )
 

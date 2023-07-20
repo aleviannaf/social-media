@@ -1,3 +1,4 @@
 import userServices from "./user.services";
+import profileServices from "./profile.services";
 
-export { userServices }
+export { userServices, profileServices }

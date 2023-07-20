@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userControllers } from "../controllers";
+import { profileControllers, userControllers } from "../controllers";
 import middlewares from "../middlewares";
 
 const userRouter: Router = Router()
@@ -24,6 +24,10 @@ userRouter.patch(
     userControllers.update
 )
 
-userRouter.post("/:id/profile")
+userRouter.post(
+    "/:id/profile",
+    middlewares.verifyProfileExists,
+    profileControllers.create
+)
 
 export default userRouter
